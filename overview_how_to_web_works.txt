@@ -1,0 +1,8 @@
+TCP -> Transmission Control Protocol
+IP -> Internet Protocol
+
+ They are communication protocols that define exactly how data travels across the web.
+
+  HTTP and HTTPS :
+  HTTPS encrypted using TLS or SSL,
+    

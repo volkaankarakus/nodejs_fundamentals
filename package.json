@@ -5,11 +5,12 @@
   "main": "slugify_learn.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start" : "nodemon slugify_learn.js"
+    "start": "nodemon slugify_learn.js"
   },
   "author": "Volkan Karakus",
   "license": "ISC",
   "dependencies": {
+    "express": "^4.18.2",
     "slugify": "^1.6.6"
   },
   "devDependencies": {
