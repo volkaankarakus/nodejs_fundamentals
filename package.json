@@ -2,10 +2,10 @@
   "name": "node-farm",
   "version": "1.0.0",
   "description": "Learning node.js ",
-  "main": "multiple_promise.js",
+  "main": "post_request.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon multiple_promise.js"
+    "start": "nodemon post_request.js"
   },
   "author": "Volkan Karakus",
   "license": "ISC",
