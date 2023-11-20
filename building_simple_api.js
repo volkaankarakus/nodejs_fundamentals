@@ -1,4 +1,7 @@
-const http = require('http');
+ // API is a service from which we can request some data.  
+
+
+ const http = require('http');
 const url = require('url');
 const fs = require('fs'); 
 
