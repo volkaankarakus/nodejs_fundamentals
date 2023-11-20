@@ -33,10 +33,31 @@ const getDogPicture = async () => {
         console.log('Random dog image saved to file!');   
     }catch(err){
         console.log(err);
+        throw err;
     }
+    return 'The string in this return does not work when the function is called. because async functions return Promise. then() must be added after calling the function to return the return here.';
 }
 
-getDogPicture();
+// A catch(err) check must be performed after then().
+//  Because even if the function gives an error later, 
+//   it does not fall into the catch() within the try catch().
+//   and throw should be added to catch() in try catch()
+// getDogPicture()
+//     .then(description => {
+//         console.log(description);
+//     })
+//     .catch(error => {
+//         console.log('ERROR 💥');    
+//     });
 
 
+// A better version of this code is as follows.
+( async () => {
+    try{
+        const x = await getDogPicture();
+        console.log(x);
+    }catch(error){
+        console.log('ERROR 💥');
+    }
+})();
   
