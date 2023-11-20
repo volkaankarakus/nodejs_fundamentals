@@ -2,10 +2,10 @@
   "name": "node-farm",
   "version": "1.0.0",
   "description": "Learning node.js ",
-  "main": "promises.js",
+  "main": "promises_with_async_and_await.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon promises.js"
+    "start": "nodemon promises_with_async_and_await.js"
   },
   "author": "Volkan Karakus",
   "license": "ISC",
