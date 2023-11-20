@@ -5,7 +5,7 @@
 
     // superagent.get() method actually returns a promise.
     // we can use it by then()
-    //  console.log(`Breed : ${data}`);
+    // console.log(`Breed : ${data}`);
     //  superagent.get(`https://dog.ceo/api/breed/${data}/images/random`).end((error,result) =>  {
     //     if(error) return console.log(error.message);
     //     console.log(result.body);
