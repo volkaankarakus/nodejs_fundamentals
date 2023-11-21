@@ -1,6 +1,7 @@
 const fs = require("fs");
 const express = require('express');
 const { error } = require("console");
+const { request } = require("http");
 const app = express();
 
 // Middleware is basically a function that can modify
@@ -36,15 +37,12 @@ app.get('/api/v1/tours/:id', (request, response) => {
     // First we convert the id from string to a number.
     const stringID = request.params.id * 1 ; 
     const tour = toursJson.find(element => element.id === stringID);
-
     if(!tour) {
-        return response.status(404). json({
+        return response.status(404).json({
             status : 'fail',
             message : 'Invalid ID',
         })
     }
-
-
     response.status(200).json({
         status : 'success',
         data : {
@@ -77,6 +75,28 @@ app.post('/api/v1/tours', (request,response) => {
 });
 
 
+// PUT
+//  with PUT, we expect that our application receives the entire new updated object
+// PATCH
+//  with PATCH, we only expect the properties that should actually  on the object. 
+
+app.patch('/api/v1/tours/:id', (request,response) => {
+    const stringID = request.params.id * 1 ; 
+    const tour = toursJson.find(element => element.id === stringID);
+    if(!tour) {
+        return response.status(404).json({
+            status : 'fail',
+            message : 'Invalid ID',
+        });  
+    }
+
+    response.status(200).json({
+        status : 'success',
+        data : {
+            tour : '<Updated Tour Here ...>',
+        },
+    })
+});
 
 const port  = 3000;
 app.listen(port, () => {
