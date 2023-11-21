@@ -1,5 +1,5 @@
 const dotenv = require('dotenv');
-dotenv.config({path : './config.env'});
+dotenv.config({ path: './config.env' });
 
 // starting file where everything starts and its there when we listen to our server.
 const app = require('./app');
@@ -10,7 +10,8 @@ console.log(app.get('env')); // -> 'development'
 // to see config.env -> npm install dotenv
 
 // START SERVER
-const port  = process.env.PORT ||  3000 ;
+const port = process.env.PORT || 3000;
 app.listen(port, () => {
     console.log(`App listen ing on port ${port}`);
-}); 
+});
+//npm install eslint prettier eslint-config-prettier eslint-plugin-prettier eslint-config-airbnb eslint-plugin-node eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react --save-dev
