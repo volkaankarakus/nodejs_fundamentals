@@ -13,6 +13,7 @@ app.use(express.json()); // here is middleware
 const toursJson =  JSON.parse(fs.readFileSync(`${__dirname}/express-crud/data/tours-simple.json`));
 
 
+// Get All Tours
 app.get('/api/v1/tours', (request, response) => {
     response.status(200).json({
         status : 'success',
@@ -23,6 +24,40 @@ app.get('/api/v1/tours', (request, response) => {
     });
 });
 
+// Get a Specific Tour
+app.get('/api/v1/tours/:id', (request, response) => {
+    console.log(request.params); // -> for '/api/v1/tours/5' -> it returns { id: '5' }
+    // for '/api/v1/tours/:id/:x/:y' -> for '/api/v1/tours/5/21/25' -> it returns { id: '5', x: '21', y: '25' }
+
+    // If we wanna make this parameter optional,  we just add "?"" to it. So no longer we have to specify.
+    // for '/api/v1/tours/:id/:x/:y?' -> y is optional. 
+
+    // We keep going with only :id
+    // First we convert the id from string to a number.
+    const stringID = request.params.id * 1 ; 
+    const tour = toursJson.find(element => element.id === stringID);
+
+    if(!tour) {
+        return response.status(404). json({
+            status : 'fail',
+            message : 'Invalid ID',
+        })
+    }
+
+
+    response.status(200).json({
+        status : 'success',
+        data : {
+            tour,
+        },
+        // results : toursJson.length,
+        // data : {
+        //    toursJson,
+        // },
+    });
+});
+
+// Create New Tour
 app.post('/api/v1/tours', (request,response) => {
     console.log(request.body); // body is available on the request because we used that middleware
     const newID = toursJson[toursJson.length -1].id + 1;
@@ -40,6 +75,8 @@ app.post('/api/v1/tours', (request,response) => {
         });
     };
 });
+
+
 
 const port  = 3000;
 app.listen(port, () => {
