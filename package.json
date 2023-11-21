@@ -2,10 +2,10 @@
   "name": "node-farm",
   "version": "1.0.0",
   "description": "Learning node.js ",
-  "main": "post_request.js",
+  "main": "refactoring_requests.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon post_request.js"
+    "start": "nodemon refactoring_requests.js"
   },
   "author": "Volkan Karakus",
   "license": "ISC",

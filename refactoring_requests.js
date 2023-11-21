@@ -2,62 +2,48 @@ const fs = require("fs");
 const express = require('express');
 const { error } = require("console");
 const { request } = require("http");
+const { create } = require("domain");
 const app = express();
 
-// Middleware is basically a function that can modify
-//   the incoming request data.
-// It called middleware 
-//   because it stands between in the middle of the request and response.
-app.use(express.json()); // here is middleware
-// data from the body is added to it.
+app.use(express.json());
 
 const toursJson =  JSON.parse(fs.readFileSync(`${__dirname}/express-crud/data/tours-simple.json`));
 
 
-// Get All Tours
-app.get('/api/v1/tours', (request, response) => {
+// GET ALL TOURS
+///////////////////////////////////////////////
+const getAllTours = (request,response) => {
     response.status(200).json({
         status : 'success',
         results : toursJson.length,
-        data : {
-           toursJson,
-        },
+        data  : {
+            toursJson
+        }
     });
-});
+}
 
-// Get a Specific Tour
-app.get('/api/v1/tours/:id', (request, response) => {
-    console.log(request.params); // -> for '/api/v1/tours/5' -> it returns { id: '5' }
-    // for '/api/v1/tours/:id/:x/:y' -> for '/api/v1/tours/5/21/25' -> it returns { id: '5', x: '21', y: '25' }
 
-    // If we wanna make this parameter optional,  we just add "?"" to it. So no longer we have to specify.
-    // for '/api/v1/tours/:id/:x/:y?' -> y is optional. 
 
-    // We keep going with only :id
-    // First we convert the id from string to a number.
-    const stringID = request.params.id * 1 ; 
-    const tour = toursJson.find(element => element.id === stringID);
-    if(!tour) {
+// GET TOUR
+///////////////////////////////////////////////
+const getTour = (request, response) => {
+    const stringID = request.params.id;
+    const tour = toursJson.find(element  => element.id === stringID);
+    if(!tour){
         return response.status(404).json({
             status : 'fail',
             message : 'Invalid ID',
         });
     }
     response.status(200).json({
-        status : 'success',
-        data : {
-            tour,
-        },
-        // results : toursJson.length,
-        // data : {
-        //    toursJson,
-        // },
-    });
-});
+        status :'success',
+        data : { tour }
+    })
+};
 
-// Create New Tour
-app.post('/api/v1/tours', (request,response) => {
-    console.log(request.body); // body is available on the request because we used that middleware
+// CREATE TOUR
+///////////////////////////////////////////////
+const createTour = (request,response) => {
     const newID = toursJson[toursJson.length -1].id + 1;
     const newTour = Object.assign({id : newID},request.body);
     toursJson.push(newTour);
@@ -72,15 +58,12 @@ app.post('/api/v1/tours', (request,response) => {
             }
         });
     };
-});
+};
 
 
-// PUT
-//  with PUT, we expect that our application receives the entire new updated object
-// PATCH
-//  with PATCH, we only expect the properties that should actually  on the object. 
-
-app.patch('/api/v1/tours/:id', (request,response) => {
+// UPDATE TOUR
+///////////////////////////////////////////////
+const updateTour = (request, response ) => {
     const stringID = request.params.id * 1 ; 
     const tour = toursJson.find(element => element.id === stringID);
     if(!tour) {
@@ -95,11 +78,14 @@ app.patch('/api/v1/tours/:id', (request,response) => {
         data : {
             tour : '<Updated Tour Here ...>',
         },
-    })
-});
+    });
+};
 
-// DELETE
-app.delete('/api/v1/tours/:id', (request, response) => {
+
+
+// DELETE TOUR
+///////////////////////////////////////////////
+const deleteTour = (request, response) => {
     const stringID = request.params.id;
     const tour = toursJson.find(element => element.id === stringID);
     if(!tour){
@@ -118,8 +104,27 @@ app.delete('/api/v1/tours/:id', (request, response) => {
             res.status(204).json({ status: 'success', data: null });
     }
   );
-});
+};
 
+
+// app.get('/api/v1/tours', getAllTours);
+// app.get('/api/v1/tour/:id', getTour);
+// app.post('/api/v1/tours', createTour);
+// app.patch('/api/v1/tours/:id', updateTour);
+// app.delete('/api/v1/tours/:id', deleteTour);
+app
+    .route('/api/v1/tours')
+    .get(getAllTours)
+    .post(createTour);
+
+app
+    .route('/api/v1/tours/:id')
+    .get(getTour)
+    .patch(updateTour) 
+    .delete(deleteTour);
+
+// LISTEN
+///////////////////////////////////////////////
 const port  = 3000;
 app.listen(port, () => {
     console.log(`App running on port ${port}...`);
