@@ -55,14 +55,6 @@ exports.getAllTours = (request,response) => {
 }
 // GET TOUR
 exports.getTour = (request, response) => {
-    const stringID = request.params.id;
-    const tour = toursJson.find(element  => element.id === stringID);
-    if(!tour){
-        return response.status(404).json({
-            status : 'fail',
-            message : 'Invalid ID',
-        });
-    }
     response.status(200).json({
         status :'success',
         data : { tour }
@@ -87,15 +79,6 @@ exports.createTour = (request,response) => {
 };
 // UPDATE TOUR
 exports.updateTour = (request, response ) => {
-    const stringID = request.params.id * 1 ; 
-    const tour = toursJson.find(element => element.id === stringID);
-    if(!tour) {
-        return response.status(404).json({
-            status : 'fail',
-            message : 'Invalid ID',
-        });  
-    }
-
     response.status(200).json({
         status : 'success',
         data : {
@@ -105,15 +88,6 @@ exports.updateTour = (request, response ) => {
 };
 // DELETE TOUR
 exports.deleteTour = (request, response) => {
-    const stringID = request.params.id;
-    const tour = toursJson.find(element => element.id === stringID);
-    if(!tour){
-        return response.status(404).json({
-            status : 'fail',
-            message : 'Invalid ID',
-        });
-    }
-
     const index = tours.indexOf(tour);
     tours.splice(index, 1);
     fs.writeFile(

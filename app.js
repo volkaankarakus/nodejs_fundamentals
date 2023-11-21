@@ -9,6 +9,8 @@ const app = express();
 // MIDDLEWARES
 app.use(morgan('dev'));
 app.use(express.json());
+// serving static files
+app.use(express.static(`${__dirname}/public`));
 
 // ROUTES
 // this two routes are actually midddleware, which is why we can use main.js in order to mount them!
