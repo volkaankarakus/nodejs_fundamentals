@@ -2,10 +2,10 @@
   "name": "node-farm",
   "version": "1.0.0",
   "description": "Learning node.js ",
-  "main": "refactoring_requests.js",
+  "main": "creating_our_own_middleware.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon refactoring_requests.js"
+    "start": "nodemon creating_our_own_middleware.js"
   },
   "author": "Volkan Karakus",
   "license": "ISC",
