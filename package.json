@@ -2,10 +2,10 @@
   "name": "node-farm",
   "version": "1.0.0",
   "description": "Learning node.js ",
-  "main": "implement_user_route.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon implement_user_route.js"
+    "start": "nodemon server.js"
   },
   "author": "Volkan Karakus",
   "license": "ISC",
