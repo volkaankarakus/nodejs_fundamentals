@@ -2,15 +2,16 @@
   "name": "node-farm",
   "version": "1.0.0",
   "description": "Learning node.js ",
-  "main": "creating_our_own_middleware.js",
+  "main": "using_third_party_middleware.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon creating_our_own_middleware.js"
+    "start": "nodemon using_third_party_middleware.js"
   },
   "author": "Volkan Karakus",
   "license": "ISC",
   "dependencies": {
     "express": "^4.18.2",
+    "morgan": "^1.10.0",
     "slugify": "^1.6.6",
     "superagent": "^8.1.2"
   },

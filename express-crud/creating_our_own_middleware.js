@@ -18,7 +18,6 @@ const toursJson =  JSON.parse(fs.readFileSync(`${__dirname}/express-crud/data/to
 app.use((request,response,next) => {
     console.log('Hello from the middleware');
     next();
-
 });
 
 // CREATE A NEW MIDDLEWARE FOR MANUPULATING REQUEST OBJECT
@@ -28,6 +27,7 @@ app.use((request,response,next) => {
 });
 
 
+//  ********* ROUTE HANDLERS *********
 // GET ALL TOURS
 const getAllTours = (request,response) => {
     response.status(200).json({ 
@@ -40,6 +40,8 @@ const getAllTours = (request,response) => {
     });
 }
 
+
+// ROUTES
 app.route('/api/v1/tours').get(getAllTours);
 
 // app
@@ -48,7 +50,7 @@ app.route('/api/v1/tours').get(getAllTours);
 //     .patch(updateTour) 
 //     .delete(deleteTour);
 
-// LISTEN APP
+// START THE SERVER
 const port = 3000;
 app.listen(port , () => {
     console.log(`App running on port ${port}`);
