@@ -16,6 +16,8 @@ const toursJson =  JSON.parse(fs.readFileSync(`${__dirname}/../express-crud/data
     //     });
     // }
 
+
+// ********************************  EXTRA MIDDLEWARES ********************************
 exports.checkID = (request,respose,next, paramValue) => {
     console.log(`Tour ID : ${paramValue}`);
     const stringID = request.params.id;
@@ -28,6 +30,16 @@ exports.checkID = (request,respose,next, paramValue) => {
     }
     next();
 };
+
+exports.checkBody = (request,resppnse,next) => {
+    if(!request.body.name || !request.body.price){
+        return response.status(400).json({
+            status : 'fail',
+            message : 'Missing name or price',
+        })
+    }
+    next();
+}
 
 
 // ******************************** HANDLER FUNCTIONS ********************************
