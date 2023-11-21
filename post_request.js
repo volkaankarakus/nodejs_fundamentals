@@ -98,6 +98,28 @@ app.patch('/api/v1/tours/:id', (request,response) => {
     })
 });
 
+// DELETE
+app.delete('/api/v1/tours/:id', (request, response) => {
+    const stringID = request.params.id;
+    const tour = toursJson.find(element => element.id === stringID);
+    if(!tour){
+        return response.status(404).json({
+            status : 'fail',
+            message : 'Invalid ID',
+        });
+    }
+
+    const index = tours.indexOf(tour);
+    tours.splice(index, 1);
+    fs.writeFile(
+        `${__dirname}/dev-data/data/tours-simple.json`,
+        JSON.stringify(tours),
+        err => {
+            res.status(204).json({ status: 'success', data: null });
+    }
+  );
+});
+
 const port  = 3000;
 app.listen(port, () => {
     console.log(`App running on port ${port}...`);
